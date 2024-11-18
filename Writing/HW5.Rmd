@@ -9,6 +9,8 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, error = FALSE, message = FALSE)
 ```
 
+#### Load Libraries
+
 ```{r}
 # laod Libraries
 library(tidyverse)
@@ -16,5 +18,37 @@ library(ggplot2)
 library(readr)
 library(broom)
 library(purrr)
+library(readr)
 ```
+
+### Read in data
+
+```{r}
+#read in data
+homicides <- read_csv("../data/homicide-data.csv")
+```
+
+
+### Tidy data
+This data was already Tidy when I used it in HW4 so I will use the same code
+```{r}
+## clean data
+# make a new column called city_name that combines city and state for something like this "Baltimore, MD)
+homicides <- homicides %>% 
+  mutate(city_name = paste(city, state, sep = ", ")) 
+
+# unsolved data frame with one row per city that gives the total number of homicides for the city and the number of unsolved homicides. 
+unsolved <- homicides %>% 
+  group_by(city_name) %>% 
+  summarise(
+    total_homicides = n(),
+    unsolved_homicides = sum(disposition %in% c("Closed without arrest", 
+                                                "Open/No arrest")))
+# filter down to data only for Baltimore
+baltimore_unsolved <- unsolved %>% #filter down to Baltimore data
+  filter(city_name == "Baltimore, MD")
+```
+
+
+
 
