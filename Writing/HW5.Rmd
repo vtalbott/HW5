@@ -45,17 +45,28 @@ homicides <- homicides %>%
 #group by month and year then sum up how many homicides their were
 homicide_count <- homicides %>% 
   mutate(year = year(date_reported),        
-         month = month(date_reported, label = TRUE)) %>%  
+         month = month(date_reported, label = FALSE)) %>%  
   group_by(year, month, city_name) %>% #grouping data for further analysis
   summarise(n = n())  
 #filter down to Baltimore
 homicide_count <- homicide_count %>% 
   filter(city_name == "Baltimore, MD")
+
+# add column for summer vs winter
+# 11, 12, 1, 2, 3, 4 (winter all other numbers are summer)
+homicide_count <- homicide_count %>% 
+  mutate(
+    season = ifelse(month %in% c(11, 12, 1, 2, 3, 4), "winter", "summer"))
+
+
 ```
 
 ## Homicides by month from 2007 to 2017 in Baltimore, MD
 ```{r}
+# graph for homicides by month from 2007 to 2017 for Baltimore, MD
 
+homicide_count %>% 
+  ggplot(aes(x = date))
 ```
 
 
