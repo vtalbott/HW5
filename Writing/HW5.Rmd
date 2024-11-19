@@ -53,6 +53,12 @@ homicide_count <- homicide_count %>%
   filter(city_name == "Baltimore, MD")
 ```
 
+## Homicides by month from 2007 to 2017 in Baltimore, MD
+```{r}
+
+```
+
+
 
 
 
