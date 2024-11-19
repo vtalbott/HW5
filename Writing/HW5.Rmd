@@ -16,9 +16,6 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, error = FALSE, message = FAL
 library(tidyverse)
 library(ggplot2)
 library(readr)
-library(broom)
-library(purrr)
-library(readr)
 library(lubridate)
 ```
 
@@ -31,7 +28,7 @@ homicides <- read_csv("../data/homicide-data.csv")
 
 
 ### Tidy data
-This data was already Tidy when I used it in HW4 so I will use the same code
+Preparing data for the final graph that shows homicides per month over the years. 
 ```{r}
 ## clean data
 # make a new column called city_name that combines city and state for something like this "Baltimore, MD)
@@ -49,12 +46,11 @@ homicides <- homicides %>%
 homicide_count <- homicides %>% 
   mutate(year = year(date_reported),        
          month = month(date_reported, label = TRUE)) %>%  
-  group_by(year, month, city_name) %>%
+  group_by(year, month, city_name) %>% #grouping data for further analysis
   summarise(n = n())  
 #filter down to Baltimore
-homicide_count2 <- homicide_count %>% 
+homicide_count <- homicide_count %>% 
   filter(city_name == "Baltimore, MD")
-#graph
 ```
 
 
