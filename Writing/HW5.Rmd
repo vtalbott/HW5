@@ -73,7 +73,8 @@ homicide_count %>%
   theme_dark() +
   labs(title = "Homicides in Baltimore, MD") +
   ylab("Monthly Homicides") +
-  xlab("Date")
+  xlab("Date") +
+  scale_fill_manual(values = c("Summer" = "skyblue", "Winter" = "grey")) 
 ```
 
 
