@@ -72,7 +72,8 @@ homicide_count %>%
   geom_col() +
   theme_dark() +
   labs(title = "Homicides in Baltimore, MD") +
-  ylab("Monthly Homicides")
+  ylab("Monthly Homicides") +
+  xlab("Date")
 ```
 
 
