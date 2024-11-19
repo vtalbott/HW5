@@ -19,6 +19,7 @@ library(readr)
 library(broom)
 library(purrr)
 library(readr)
+library(lubridate)
 ```
 
 ### Read in data
@@ -36,17 +37,18 @@ This data was already Tidy when I used it in HW4 so I will use the same code
 # make a new column called city_name that combines city and state for something like this "Baltimore, MD)
 homicides <- homicides %>% 
   mutate(city_name = paste(city, state, sep = ", ")) 
+#select columns
+homicides <- homicides %>% 
+  select(reported_date, city, state, disposition, city_name) %>% 
+#lubridate
+homicides <- homicides %>% 
+  
+  
+#group by month and then sum up how many homicides their were
 
-# unsolved data frame with one row per city that gives the total number of homicides for the city and the number of unsolved homicides. 
-unsolved <- homicides %>% 
-  group_by(city_name) %>% 
-  summarise(
-    total_homicides = n(),
-    unsolved_homicides = sum(disposition %in% c("Closed without arrest", 
-                                                "Open/No arrest")))
-# filter down to data only for Baltimore
-baltimore_unsolved <- unsolved %>% #filter down to Baltimore data
-  filter(city_name == "Baltimore, MD")
+#filter down to Baltimore
+  
+#graph
 ```
 
 
