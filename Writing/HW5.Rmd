@@ -69,7 +69,7 @@ homicide_count <- homicide_count %>%
 
 homicide_count %>% 
   ggplot(aes(x = date, y = n)) +
-  geom_col(aes(fill = season, width = 1.5)) +
+  geom_col(aes(fill = season)) +
   theme_dark() +
   labs(title = "Homicides in Baltimore, MD") +
   ylab("Monthly Homicides") +
