@@ -55,9 +55,11 @@ homicide_count <- homicide_count %>%
 # add column for summer vs winter
 # 11, 12, 1, 2, 3, 4 (winter all other numbers are summer)
 homicide_count <- homicide_count %>% 
-  mutate(
-    season = ifelse(month %in% c(11, 12, 1, 2, 3, 4), "winter", "summer"))
-
+  mutate(season = ifelse(month %in% c(11, 12, 1, 2, 3, 4), "winter", "summer"))
+# a date column that includes month and year for ploting
+homicide_count <- homicide_count %>%
+  mutate(date = paste(year, month, sep = "-")) %>% 
+  mutate(date = ym(date))
 
 ```
 
@@ -66,7 +68,11 @@ homicide_count <- homicide_count %>%
 # graph for homicides by month from 2007 to 2017 for Baltimore, MD
 
 homicide_count %>% 
-  ggplot(aes(x = date))
+  ggplot(aes(x = date, y = n, fill = season)) +
+  geom_col() +
+  theme_dark() +
+  labs(title = "Homicides in Baltimore, MD") +
+  ylab("Monthly Homicides")
 ```
 
 
