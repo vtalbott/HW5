@@ -39,11 +39,12 @@ homicides <- homicides %>%
   mutate(city_name = paste(city, state, sep = ", ")) 
 #select columns
 homicides <- homicides %>% 
-  select(reported_date, city, state, disposition, city_name) %>% 
+  select(reported_date, city, state, disposition, city_name)
 #lubridate
 homicides <- homicides %>% 
-  
-  
+  mutate(date_reported = ymd(reported_date)) %>% 
+  select(-reported_date)
+
 #group by month and then sum up how many homicides their were
 
 #filter down to Baltimore
